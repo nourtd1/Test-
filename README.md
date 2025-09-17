@@ -1,6 +1,6 @@
 # Calculatrice Pro (PHP natif)
 
-Application web de calculatrice moderne, responsive et sans framework (PHP natif + HTML/CSS/JS).
+Application web de calculatrice moderne, responsive et sans framework (PHP natif + HTML/CSS/JS), restructurée avec autoload Composer, tests et séparation front.
 
 ## Fonctionnalités
 - **Calculs**: `+ - * / ^`, parenthèses, décimaux
@@ -13,13 +13,22 @@ Application web de calculatrice moderne, responsive et sans framework (PHP natif
 
 ## Installation
 1. PHP 8+ requis.
-2. Placez les fichiers sur votre serveur web.
-
-Serveur PHP intégré (développement):
+2. Installer les dépendances Composer:
 ```bash
-php -S localhost:8000
+composer install
 ```
-Puis ouvrez `http://localhost:8000/index.php`.
+
+### Démarrage (serveur PHP intégré)
+```bash
+php -S localhost:8000 -t public
+```
+Puis ouvrez `http://localhost:8000/`.
+
+### Démarrage avec Docker
+```bash
+docker compose up --build
+```
+Ouvrez `http://localhost:8080/`.
 
 ## Utilisation
 - Entrez une expression (ex: `2*sin(3.14159/2)+sqrt(9)-log(100)`) puis « Calculer ».
@@ -36,7 +45,13 @@ Puis ouvrez `http://localhost:8000/index.php`.
 
 ## Limites & Sécurité
 - L'évaluateur parse l'expression (shunting-yard), pas d'`eval()` PHP.
+- CSRF activé pour les POST; en-têtes de sécurité + CSP de base.
 - Taux de change statiques (démo). Pour la production, branchez une API FX.
+
+## Tests
+```bash
+composer test
+```
 
 ## Licence
 MIT
