@@ -1,5 +1,8 @@
 <?php
-session_start();
+// Point d'entrée déplacé dans public/index.php
+// Ce fichier redirige désormais vers la nouvelle structure.
+header('Location: /public/index.php');
+exit;
 
 // Initialize session storage
 if (!isset($_SESSION['history'])) {
