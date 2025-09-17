@@ -6,6 +6,11 @@ require dirname(__DIR__) . '/bootstrap.php';
 use App\Support\Csrf;
 use App\Math\MathParser;
 
+// Ensure history array exists in session
+if (!isset($_SESSION['history']) || !is_array($_SESSION['history'])) {
+    $_SESSION['history'] = [];
+}
+
 // ------------------------------
 // Utilities: URL + Theme helpers
 // ------------------------------

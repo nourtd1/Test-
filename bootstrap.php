@@ -1,8 +1,13 @@
 <?php
 declare(strict_types=1);
 
-// Composer autoload
-require __DIR__ . '/vendor/autoload.php';
+// Lightweight PSR-4 autoloader for App\* classes (fallback when Composer is absent)
+spl_autoload_register(static function(string $class): void {
+    if (strpos($class, 'App\\') !== 0) { return; }
+    $relative = str_replace('App\\', 'src\\', $class) . '.php';
+    $path = __DIR__ . DIRECTORY_SEPARATOR . str_replace('\\', DIRECTORY_SEPARATOR, $relative);
+    if (is_file($path)) { require $path; }
+});
 
 // Start session early
 if (session_status() !== PHP_SESSION_ACTIVE) {
